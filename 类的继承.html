@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的继承</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 定义一个Person类
+    class Person {
+      constructor (name, age) {
+        this.name = name
+        this.age = age
+      }
+      // 一般方法
+      speak (hobby) {
+        console.log(`我叫${this.name},爱好是${hobby}`)
+      }
+    }
+
+
+    // 创建一个student类继承于Person
+    class Student extends Person {
+      constructor (name, age, grade) {
+        // super必须放到所有属性之前
+        super(name, age)
+        this.grade = grade
+      }
+      // 重写从父类继承过来的方法
+      speak () {
+        console.log(`我叫${this.name}`)
+      }
+      study () {
+        console.log('hard start')
+      }
+    }
+    // 继承的作用: 让子类也可以使用父类原型上的方法
+    const s1 = new Student('szc', 15, '高一')
+    s1.speak('football')
+
+    /**
+     * 1.类中的构造器不是必须写的,要对实例进行一些初始化的操作,如添加指定属性时才写
+     * 2.如果a类继承了b类,且a类中写了构造器,那么a类构造器中的super是必须要调用的
+     * 3.类中定义的方法其实是放在了原型对象上,供它的实例使用
+    */
+  </script>
+</body>
+</html>

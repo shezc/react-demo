@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <!-- 引入react-dom -->
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    const results = ['vue', 'react']
+    // 创建虚拟dom
+    const VDOM = (
+      <div>
+        <h1>
+          前端框架  
+        </h1>
+        <ul>
+          {
+            results.map(item => {
+              return <li key={item}>{item}</li>
+            })
+          }
+        </ul>
+      </div>
+    )
+    // 渲染虚拟dom到页面上
+    ReactDOM.render(VDOM, document.getElementById('app'))
+
+    // 模块与组件 模块化与组件化的理解
+
+    // 模块
+      // 理解: 向外提供特定的功能的js程序,一般就是一个js文件
+      // 为什么要拆成模块:随着业务逻辑增加,代码越来越多且复杂
+      // 作用:复用js,简化js的编写,提高js运行效率
+
+    // 组件
+      // 理解:用来实现局部功能效果代码和资源的集合(html/css/js/img/video...)
+      // 为什么: 一个界面的功能可能很复杂
+      // 作用:复用编码,简化项目编码,提高运行效率
+
+    // 模块化
+      // 当应用的js都以模块来编写的,这个应用就是一个模块化的应用
+
+    // 组件化
+      // 当应用是以多组件的方式实现,这个应用就是一个组件化的应用
+
+  </script>
+</body>
+</html>

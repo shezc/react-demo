@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的相关知识</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 定义一个Person类
+    class Person {
+      // 构造器方法
+      constructor (name, age) {
+        // 构造器中的this是类的实例对象
+        this.name = name
+        this.age = age
+      }
+      // 一般方法
+      speak (hobby) {
+        // speak方法放到了哪里? --类的原型对象上
+        // speak方法是给谁用的? --实例
+        // speak中的this一般来说是实例对象(如果没有通过call/apply/bind更改this的情况下)
+        console.log(`我叫${this.name},爱好是${hobby}`)
+      }
+    }
+    // 创建一个Person的实例对象
+    // 构造器中的this指的p1
+    const p1 = new Person('TOM', 18)
+    console.log(p1)
+    p1.speak('soccer')
+    console.log(p1 instanceof Person)
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <!-- 引入react-dom -->
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Demo extends React.Component {
+      constructor (props) {
+        super (props)
+        this.state = {isHot: false}
+        this.changeWeather = this.changeWeather.bind(this)
+      }
+
+      render() {
+        const { isHot } = this.state
+        return <h1 onClick={this.changeWeather}>{isHot ? '热' : '冷'}</h1>
+      }
+
+      changeWeather () {
+        const { isHot } = this.state
+        this.setState({isHot: !isHot})
+      }
+    }
+    ReactDOM.render(<Demo />, document.getElementById('app'))
+  </script>
+</body>
+</html>
