@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <!-- 引入react-dom -->
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+   <!-- 引入第三方库prop-types检测props传入值的合法性 -->
+   <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // constructor (props) {
+      //   // 构造器是否接收props,是否传递给super,取决于:是否希望在构造器中通过this访问props
+      //   super (props)
+      // }
+
+
+
+      static propTypes = {
+        isHot: PropTypes.string,
+        isRain: PropTypes.number.isRequired
+      }
+
+      static defaultProps = {
+        age: 16
+      }
+
+
+      render () {
+        const { isHot, wind, age, isRain } = this.props
+        return (
+          <div>
+            <h1>{isHot}</h1>
+            <h2>显示传入的wind{wind}</h2>
+            <h3>{age}</h3>
+            <h1>{isRain === 1 ? '下雨' : '无下雨'}</h1>
+          </div>
+        )
+      }
+    }
+    // 原理上也就是给Weather类添加了propTypes这个属性
+    // Weather.propTypes = {
+      // isHot: PropTypes.string,
+      // isRain: PropTypes.number.isRequired
+    // }
+    // 原理上也就是给Weather类添加了defaultProps这个属性
+    // Weather.defaultProps = {
+    //   age: 16
+    // }
+    const resultMap = {isHot: '12', wind: '风', isRain: 1}
+    ReactDOM.render(<Weather {...resultMap}/>, document.getElementById('app'))
+  </script>
+</body>
+</html>
