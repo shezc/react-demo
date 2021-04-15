@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <!-- 引入react-dom -->
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+   <!-- 引入第三方库prop-types检测props传入值的合法性 -->
+   <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Login extends React.Component {
+      state = {
+        userName: '',
+        passWord: '' 
+      }
+      changeState = (type, { target }) => {
+        const { value } = target
+        this.setState({[type]: value })
+      }
+      showData = () => {
+        alert(`用户名是${this.state.userName},密码是${this.state.passWord}`)
+      }
+
+      render() {
+        return (
+          <div>
+            <input type="text" onChange={(e) => this.changeState('userName', e)} placeholder="请输入用户名" />
+            <input type="password" onChange={(e) => this.changeState('passWord', e)} placeholder="请输入密码" />  
+            <button onClick={this.showData}>点击显示</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Login />, document.getElementById('app'))
+  </script>
+</body>
+</html>

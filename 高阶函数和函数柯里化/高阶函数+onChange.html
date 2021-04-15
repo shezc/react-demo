@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <!-- 引入react-dom -->
+   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+   <!-- 引入第三方库prop-types检测props传入值的合法性 -->
+   <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Login extends React.Component {
+      // 高阶函数
+      changeState = (type) => {
+        return (event) => {
+          this.setState({[type]: event.target.value})
+        }
+      }
+
+      render() {
+        return (
+          <div>
+            <input type="text" placeholder="请输入用户名" onChange={this.changeState('userName')} />
+            <div />
+            <input type="text" placeholder="请输入密码" onChange={this.changeState('passWord')} />  
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Login />, document.getElementById('app'))
+    // 什么是高阶函数? 
+    // 一个函数的返回值/参数为一个函数,那么该函数被称为高阶函数
+
+    // 什么是函数的柯里化?
+    // 通过函数调用继续返回函数的方式,实现多次接收参数最后统一处理的函数编码形式
+
+    // 🌰function sum(a) {
+    //   return b => {
+    //     return c => {
+    //       return a + b + c
+    //     }
+    //   }
+    // }
+    // sum(1)(2)(3) // 6
+
+    // 常见的高阶函数有哪些?
+    // Promise, setTimeout, 数组的常见方法(map, foreach)
+  </script>
+</body>
+</html>
