@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期</title>
+    <!-- 引入react -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- 引入react-dom -->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 引入babel -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- 引入第三方库prop-types检测props传入值的合法性 -->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      /*
+        1.初始化阶段
+          a. constructor()
+          b. componentWillMount()
+          c. render()
+          d. componentDidMount() => 常用,一般在这个钩子函数中做一些初始化的事,例如:开启定时器,发送网络请求,订阅消息等
+
+        2.更新阶段: 由组件内部this.setState()或父组件render触发
+          a. shouldComponentUpdate()
+          b. componentWillUpdate()
+          c. render() => 必须使用的一个
+          d. componentDidUpdate()
+
+        3.卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+          a. componentWillUnmount() => 常用,一般在这个钩子函数中做一些收尾的事,例如: 关闭定时器,取消消息订阅等
+      */
+    </script>
+
+  </body>
+</html>

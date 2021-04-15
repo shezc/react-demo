@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期</title>
+    <!-- 引入react -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- 引入react-dom -->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 引入babel -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- 引入第三方库prop-types检测props传入值的合法性 -->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        constructor (props) {
+          super (props)
+          this.state = { count: 0 }
+          console.log('constructor', '构造器中')
+        }
+        add = () => {
+          let { count } = this.state
+          count += 1
+          this.setState({count})
+        }
+        death = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+        }
+        force = () => {
+          // forceUpdate可以不需要数据更新就刷新界面,也不受shouldComponentUpdate控制
+          this.forceUpdate()
+        }
+
+        // 挂载之前
+        componentWillMount () {
+          console.log('componentWillMount', '组件即将挂载')
+        }
+        // 挂载之后
+        componentDidMount () {
+          console.log('componentDidMount', '组件挂载完毕')
+        }
+        // 组件将要卸载
+        componentWillUnmount () {
+          console.log('componentWillUnmount', '组件即将卸载')
+        }
+
+        // 组件是否可以更新,返回一个布尔值,如果没有写该钩子函数,则默认返回true,是一个控制组件更新的阀门
+        shouldComponentUpdate() {
+          console.log('shouldComponentUpdate')
+          return true
+        }
+
+        // 组件将要更新
+        componentWillUpdate () {
+          console.log('componentWillUpdate', '组件将要更新的钩子,作用于render之前')
+        }
+
+        // 组件更新完毕
+        componentDidUpdate () {
+          console.log('componentDidUpdate', '组件更新完毕,作用于render之后')
+        }
+
+        render () {
+          // 界面每更新一次都会进入render方法中
+          // 第一次render的调用在componentWillMount后
+          console.log('render')
+          const { count } = this.state
+          return (
+            <div>
+              <h1>{count}</h1>
+              <button onClick={this.add}>点击+1</button>
+              <button onClick={this.death} style={{margin: '16px'}}>卸载组件</button>
+              <button onClick={this.force}>强制更新(不受阀门的控制)</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById('app'))
+    </script>
+
+  </body>
+</html>
