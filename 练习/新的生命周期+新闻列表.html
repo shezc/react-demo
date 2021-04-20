@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+   <style>
+      .list {
+        width: 200px;
+        height: 150px;
+        background-color: aqua;
+        overflow-y: auto;
+      }
+      .news {
+        height: 30px;
+      }
+   </style>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Demo extends React.Component {
+      state = {news: [], timer: null}
+
+      clearTimer = () => {
+        clearInterval(this.state.timer)
+      }
+
+      killComponent = () => {
+        ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+      }
+
+      componentWillUnmount () {
+        // 销毁组件的时候需要清空定时器要不控制台会报错
+        this.clearTimer()
+        console.log('组件即将销毁')
+      }
+
+      componentDidMount () {
+        let { timer } = this.state
+        timer = setInterval (() => {
+          const { news } = this.state
+          const addedNew = `新闻${news.length + 1}`
+          this.setState({news: [addedNew, ...news]})
+        }, 1000)
+        this.setState({timer})
+      }
+
+      getSnapshotBeforeUpdate () {
+        return this.refs.parentNode.scrollHeight
+      }
+
+      componentDidUpdate (preProps, preState, height) {
+        this.refs.parentNode.scrollTop += this.refs.parentNode.scrollHeight - height
+      }
+
+      render() {
+        const { news } = this.state 
+        return (
+          <div>
+            <div className="list" ref="parentNode">
+            {
+              news.map((item, index) => {
+                return <div key={index} className="news">{item}</div>
+              })
+            }
+            </div>
+            <button onClick={this.clearTimer}>清除定时器</button>
+            <button onClick={this.killComponent}>销毁组件</button>
+          </div>
+          
+        )
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('app'))
+  </script>
+</body>
+</html>

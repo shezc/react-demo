@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react-demo</title>
+   <!-- 引入react -->
+   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+   <!-- 引入babel -->
+   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="app"></div>
+  <script type="text/babel">
+    class Demo extends React.Component {
+      render() {
+        
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('app'))
+
+    /*
+      react/vue中key的作用?
+
+      简单说: 
+        key是虚拟DOM对象的标识,在更新显示时key起着极其重要的作用
+
+      详细的说: 
+        当状态中的数据发生变化时,react会根据[新数据]生成[新的虚拟DOM],随后React进行[新的虚拟DOM]和[旧的虚拟DOM]diff算法比较,比较规则如下:
+          1.旧虚拟DOM中找到和新虚拟DOM相同的key
+            a.若虚拟DOM中内容没变,直接使用之前的虚拟DOM
+            b.若虚拟DOM中的内容变了,则生成真实DOM,且替换掉之前的真实DOM
+          
+          2.就虚拟DOM没有找到与新虚拟DOM相同的key
+            a.创建新的真实DOM,随后渲染到页面
+
+      
+      用index作为key可能会引发的问题?
+        1.若对数据进行:逆序添加,逆序删除等破坏顺序的操作: 会产生没有必要的真实DOM => 界面效果没问题,但是效率极低
+        
+        2.如果结构中还包含输入类DOM: 会产生错误DOM更新 => 界面有问题
+
+        3.注意: 如果不存在逆序改变顺序的操作,仅用于列表渲染用作展示,则使用index没有问题
+
+    */
+
+  </script>
+</body>
+</html>
